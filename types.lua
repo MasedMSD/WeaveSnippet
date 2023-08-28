@@ -60,7 +60,7 @@ render = {}
 --- @field group fun(label: string): UIContainer | nil
 --- @field checkbox fun(label: string): UICheckbox | nil
 --- @field slider fun(label: string, min: number, max: number): UISlider | nil
---- @field dropbox fun(label: string, multiselect: boolean, items: any[]): UIDropbox | nil
+--- @field dropbox fun(label: string, multiselect: boolean, ...): UIDropbox | nil
 --- @field color_picker fun(label: string, alpha?: boolean): UIColorpicker | nil
 --- @field register_tab fun(tab: UITab)
 --- @field update fun()
@@ -77,13 +77,13 @@ cheat = {}
 client = {}
 
 --- @class g_script
---- @field save fun(name: string, items: UIControl[])
+--- @field save fun(name: string, ...)
 --- @field save_all fun(name: string)
---- @field dump_base64 fun(items: UIControl[]): string | nil
+--- @field dump_base64 fun(...): string | nil
 --- @field dump_all_base64 fun(): string | nil
---- @field load fun(name: string, items: UIControl[])
+--- @field load fun(name: string, ...)
 --- @field load_all fun(name: string)
---- @field load_base64 fun(text: string, items: UIControl[])
+--- @field load_base64 fun(text: string, ...)
 --- @field load_all_base64 fun(text: string)
 --- @field set_name fun(name: string)
 --- @field set_version fun(version: string)
