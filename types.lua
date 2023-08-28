@@ -56,15 +56,46 @@ vars = {}
 render = {}
 
 --- @class g_ui
---- @field tab fun(label: string)
---- @field group fun(label: string)
---- @field checkbox fun(label: string)
---- @field slider fun(label: string)
---- @field dropbox fun(label: string)
---- @field color_picker fun(label: string)
---- @field register_tab fun(tab: ui_tab)
+--- @field tab fun(label: string): UITab | nil
+--- @field group fun(label: string): UIContainer | nil
+--- @field checkbox fun(label: string): UICheckbox | nil
+--- @field slider fun(label: string, min: number, max: number): UISlider | nil
+--- @field dropbox fun(label: string, multiselect: boolean, items: any[]): UIDropbox | nil
+--- @field color_picker fun(label: string, alpha?: boolean): UIColorpicker | nil
+--- @field register_tab fun(tab: UITab)
 --- @field update fun()
 ui = {}
+
+--- @class g_cheat
+--- @field username fun(): string
+--- @field build_date fun(): string
+--- @field print fun(...)
+cheat = {}
+
+--- @class g_client
+--- @field choked_commands fun(): number
+client = {}
+
+--- @class g_script
+--- @field save fun(name: string, items: UIControl[])
+--- @field save_all fun(name: string)
+--- @field dump_base64 fun(items: UIControl[]): string | nil
+--- @field dump_all_base64 fun(): string | nil
+--- @field load fun(name: string, items: UIControl[])
+--- @field load_all fun(name: string)
+--- @field load_base64 fun(text: string, items: UIControl[])
+--- @field load_all_base64 fun(text: string)
+--- @field set_name fun(name: string)
+--- @field set_version fun(version: string)
+script = {}
+
+--- @class g_hotkeys
+--- @field find fun(key: hotkey_keys): hotkey
+hotkeys = {}
+
+--- @class g_callbacks
+--- @field new fun(callback_name: callback_name, fun: fun(event: event | anti_aim_settings | cmd))
+callback = {}
 
 --- @class color
 --- @param r number
@@ -96,7 +127,37 @@ end;
 --- @field get_string fun(key: string): string;
 --- @field set_string fun(key: string, value: number): string;
 
+--- @class anti_aim_settings
+--- @field force_off boolean
+--- @field pitch number
+--- @field ignore_freestand boolean
+--- @field ignore_manuals boolean
+--- @field yaw_add number
+--- @field spin boolean
+--- @field spin_speed number
+--- @field spin_range number
+--- @field jitter_angle number
+--- @field align_desync boolean
+--- @field randomize_jitter	 boolean
+--- @field desync_amount number
+--- @field desync_jitter boolean
+--- @field desync_direction number
+--- @field align_by_target number
+--- @field inverter boolean
+
+--- @class cmd
+--- @field command_number number
+--- @field tick_count number
+--- @field view_angles number
+--- @field aim_direction number
+--- @field move number
+--- @field buttons number
+--- @field send_packet number
+
 --- @class font
+
+--- @class hotkey
+--- @field state fun(): boolean
 
 --- @class cheat_var
 --- @field get fun(): any
@@ -110,6 +171,54 @@ end;
 vector = function(x, y, z)
     return { x, y, z }
 end;
+
+--- @class UITab
+--- @field set_icon fun(path: string)
+--- @field set_color fun(color1: color, color2?: color)
+--- @field register fun()
+
+--- @class UINode
+--- @field add fun(item: UINode)
+
+--- @class UIControl: UINode
+--- @field set_key fun(key: string)
+--- @field get_key fun(): string
+
+--- @class UIContainer: UINode
+
+--- @class UICheckbox: UIControl
+--- @field get fun(): boolean
+--- @field set fun(value: boolean)
+
+--- @class UISlider: UIControl
+--- @field get fun(): boolean
+--- @field set fun(value: boolean)
+
+--- @class UIDropbox: UIControl
+--- @field get fun(): boolean
+--- @field set fun(value: boolean)
+
+--- @class UIColorpicker: UIControl
+--- @field get fun(): color
+--- @field set fun(value: color)
+
+--- @class UIButton: UIControl
+--- @field callback fun()
+
+--- @alias hotkey_keys
+--- | "hotkey.thirdperson"
+--- | "hotkey.doubletap"
+--- | "hotkey.peek_assist"
+--- | "hotkey.override_damage"
+--- | "hotkey.manual_right"
+--- | "hotkey.manual_left"
+--- | "hotkey.manual_back"
+--- | "hotkey.manual_forward"
+--- | "hotkey.desync_inverter"
+--- | "hotkey.slow_walk"
+--- | "hotkey.fake_duck"
+--- | "hotkey.freestand"
+--- | "hotkey.hide_shot"
 
 --- @alias callback_name
 --- Weave callbacks
