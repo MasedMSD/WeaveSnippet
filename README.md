@@ -16,4 +16,4 @@
 ### Todo
 
 -   [ ] Generics Support
--   [ ] Description for methods
+-   [x] Description for methods
