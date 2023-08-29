@@ -2,7 +2,7 @@
 
 ### How to install?
 
--   Download lua-language-server:
+-   Download [lua-language-server](https://luals.github.io):
 
     -   [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
 
