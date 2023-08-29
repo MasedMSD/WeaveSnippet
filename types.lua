@@ -1,6 +1,10 @@
 --- Author: Mased
 --- Thanks: izke
 
+--- Useful links:
+--- https://gamesensical.gitbook.io/docs/developers/netprops
+--- https://wiki.alliedmods.net/Counter-Strike:_Global_Offensive_Events
+
 --- @class AntiAim
 --- @field can_work fun(): boolean;
 --- @field get_at_target_yaw fun(): number
@@ -117,6 +121,7 @@ script = {}
 hotkeys = {}
 
 --- @class Callbacks
+--- List of all [events](https://wiki.alliedmods.net/Counter-Strike:_Global_Offensive_Events)
 --- @field new fun(callback_name: callback_name, fun: fun(event: Event | UserCmd | AntiAimSettings))
 --- @field render fun(callbackFn: fun())
 --- @field pre_move fun(callbackFn: fun(cmd: UserCmd))
@@ -314,6 +319,7 @@ end;
 --- @field set_string fun(self: Convar, value: string);
 
 --- @class Entity
+--- [Props](https://gamesensical.gitbook.io/docs/developers/netprops)
 --- @field get_prop fun(self: Entity, table: string, prop: string): any
 
 --- @class Event
