@@ -1,5 +1,7 @@
 # WeaveSnippet
 
+[Documentation](https://docs.weave.su/)
+
 ### How to install?
 
 -   Download [lua-language-server](https://luals.github.io):
