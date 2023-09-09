@@ -15,9 +15,12 @@ anti_aim = {};
 convar = {};
 
 --- @class Entities
+--- Returns entity by index
 --- @field get fun(index: number): Entity | nil
+--- Returns entity by user ID
+--- @field get_by_user_id fun(user_id: number): Entity | nil
 --- Returns local player index
---- @field get_local_player fun(): number;
+--- @field me fun(): Entity | nil;
 --- All arguments are optional, by default is `false`, `false`, `nil`. Callback takes `Entity` in arguments and have to return `boolean`. If you return `false` in callback this player won't included in the return value.
 --- @field get_players fun(enemies_only?: boolean, include_dormant?: boolean, callback?: function): Entity[];
 entity = {};
@@ -59,12 +62,14 @@ vars = {}
 --- @class Render
 --- @field text fun(font: Font, text: string, position: Vector, color?: Color, flags?: number, wrap_width?: number)
 --- @field filled_rect fun(position: Vector, size: Vector, color: Color, rounding?: number, rounding_flags?: number)
+--- @field image fun(texture: Texture, position: Vector, size?: Vector, color?: Color, rounding?: number)
 --- Function won't work inside the callbacks. The only way to create `Font` is create it on the first lines in your script
 --- @field create_font fun(path: string, size: number, flags?: number): Font | nil
 --- Function won't work inside the callbacks. The only way to create `Texture` is create it on the first lines in your script
 --- @field create_texture fun(path: string): Texture | nil
---- @field world_to_screen fun(world_position: Vector): Vector | { x: number, y: number, z: number }
+--- @field world_to_screen fun(world_position: Vector): Vector | { x: number, y: number, z: number } | nil
 --- @field get_screen_size fun(): Vector | { x: number, y: number, z: number }
+--- @field text_size fun(font: Font, text: string, wrap_width?: number): Vector | { x: number, y: number, z: number }
 render = {}
 
 --- @class UI
@@ -80,13 +85,25 @@ render = {}
 --- @field register_tab fun(tab: UITab)
 --- Performs a complete UI update
 --- @field update fun()
+--- Returns current accent colors
+--- @field get_accent fun(): Color
+--- Overrides accent colors
+--- @field override_accent fun(color1: Color, color2: Color)
+--- Returns current menu position
+--- @field get_menu_position fun(): Vector | { x: number, y: number, z: number }
+--- Sets menu position
+--- @field set_menu_position fun(position: Vector)
+--- Returns current menu size
+--- @field get_menu_size fun(): Vector | { x: number, y: number, z: number }
+--- Returns current DPI scale
+--- @field get_dpi_scale fun(): number
 ui = {}
 
 --- @class Cheat
 --- @field username fun(): string
 --- @field build_date fun(): string
 --- Prints output to the console
---- @field print fun(...)
+--- @field print fun(output: string)
 cheat = {}
 
 --- @class Client
@@ -127,6 +144,8 @@ hotkeys = {}
 --- @field pre_move fun(callbackFn: fun(cmd: UserCmd))
 --- @field create_move fun(callbackFn: fun(cmd: UserCmd))
 --- @field post_move fun(callbackFn: fun(cmd: UserCmd))
+--- @field config_save fun(callbackFn: fun(config: CheatConfig))
+--- @field config_load fun(callbackFn: fun(config: CheatConfig))
 --- @field antiaim_setup fun(callbackFn: fun(aa: AntiAimSettings))
 --- @field unload fun(callbackFn: fun())
 --- @field player_death fun(callbackFn: fun(event: Event))
@@ -321,6 +340,8 @@ end;
 --- @class Entity
 --- [Props](https://gamesensical.gitbook.io/docs/developers/netprops)
 --- @field get_prop fun(self: Entity, table: string, prop: string): any
+--- @field get_origin fun(self: Entity): Vector | { x: number, y: number, z: number }
+--- @field get_velocity fun(self: Entity): Vector  | { x: number, y: number, z: number }
 
 --- @class Event
 --- @field get_name fun(self: Event): string;
@@ -357,6 +378,16 @@ end;
 --- @field move number
 --- @field buttons number
 --- @field send_packet number
+
+--- @class CheatConfig
+--- @field name string
+--- Unique ID of config
+--- @field id string
+--- The name of the user who created this config
+--- @field author string
+--- The name of the user who was edited this config last time
+--- @field last_update_by string
+--- @field private boolean
 
 --- @class Font
 
@@ -436,6 +467,8 @@ end;
 --- | "create_move"
 --- | "post_move"
 --- | "antiaim_setup"
+--- | "config_save"
+--- | "config_load"
 --- | "unload"
 --- CS:GO callbacks
 --- | "player_death"
