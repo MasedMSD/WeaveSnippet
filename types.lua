@@ -38,8 +38,8 @@ entity = {};
 --- @field tickcount fun(): number
 --- Returns the delay between each tick
 --- @field interval_per_tick fun(): number
---- @field interpolation_amount	 fun(): number
---- @field simticks_this_frame	 fun(): number
+--- @field interpolation_amount	fun(): number
+--- @field simticks_this_frame fun(): number
 global_vars = {}
 
 --- @class Logs
